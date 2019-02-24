@@ -10,7 +10,7 @@ export class PageVideoListComponent implements OnInit {
   constructor(private video: MoviesService) {}
 
   async getMovies() {
-    const response = await gitthis.video.fetchMovies();
+    const response = await this.video.fetchMovies();
     console.log(response);
     return response;
   }
