@@ -9,7 +9,7 @@ import { Movies } from '../../interfaces/movies';
 })
 export class PageVideoListComponent implements OnInit {
 
-  public movies: Movies = null;
+  public movies: Movies = [];
 
   constructor(private video: MoviesService) {}
 

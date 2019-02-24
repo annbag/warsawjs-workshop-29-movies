@@ -7,7 +7,7 @@ import { Movies } from '../../interfaces/movies';
   styleUrls: ['./video-list.component.css']
 })
 export class VideoListComponent implements OnInit {
-  @Input() movies: Movies = null;
+  @Input() movies: Movies = [];
 
   constructor() {}
 
