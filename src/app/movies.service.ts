@@ -10,7 +10,7 @@ export class MoviesService {
   constructor(private http: HttpClient) {}
 
   async fetchMovies() {
-    const response = await this.http.get(environment.movieUrl).toPromise();
+    const response = await this.http.get(environment.moviesUrl).toPromise();
     return response;
   }
 }
