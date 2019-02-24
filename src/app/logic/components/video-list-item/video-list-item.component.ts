@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class VideoListItemComponent implements OnInit {
   @Input() movie: Movie = null;
+
   constructor() {}
 
   ngOnInit() {}
