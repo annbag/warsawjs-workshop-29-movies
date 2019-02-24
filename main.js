@@ -5,21 +5,33 @@
   !*** ./src/$$_lazy_route_resource lazy namespace object ***!
   \**********************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function webpackEmptyAsyncContext(req) {
-	// Here Promise.resolve().then() is used instead of new Promise() to prevent
-	// uncaught exception popping up in devtools
-	return Promise.resolve().then(function() {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
+var map = {
+	"./logic/logic.module": [
+		"./src/app/logic/logic.module.ts",
+		"logic-logic-module"
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids) {
+		return Promise.resolve().then(function() {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+	return __webpack_require__.e(ids[1]).then(function() {
+		var id = ids[0];
+		return __webpack_require__(id);
 	});
 }
-webpackEmptyAsyncContext.keys = function() { return []; };
-webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
-module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
+module.exports = webpackAsyncContext;
 
 /***/ }),
 
@@ -33,10 +45,10 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _logic_components_page_home_page_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./logic/components/page-home/page-home.component */ "./src/app/logic/components/page-home/page-home.component.ts");
-/* harmony import */ var _logic_components_page_page_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./logic/components/page/page.component */ "./src/app/logic/components/page/page.component.ts");
+/* harmony import */ var _components_page_home_page_home_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/page-home/page-home.component */ "./src/app/components/page-home/page-home.component.ts");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _components_page_contact_page_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/page-contact/page.component */ "./src/app/components/page-contact/page.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -50,20 +62,26 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var routes = [
     {
         path: '',
-        component: _logic_components_page_home_page_home_component__WEBPACK_IMPORTED_MODULE_2__["PageHomeComponent"]
+        component: _components_page_home_page_home_component__WEBPACK_IMPORTED_MODULE_0__["PageHomeComponent"]
     },
     {
         path: 'contact',
-        component: _logic_components_page_page_component__WEBPACK_IMPORTED_MODULE_3__["PageComponent"]
+        component: _components_page_contact_page_component__WEBPACK_IMPORTED_MODULE_3__["PageComponent"]
+    },
+    {
+        path: 'videos',
+        loadChildren: './logic/logic.module#LogicModule'
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
     }
     AppRoutingModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forRoot(routes)],
-            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]]
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, {
+                    useHash: true,
+                })],
+            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
         })
     ], AppRoutingModule);
     return AppRoutingModule;
@@ -91,7 +109,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p [appBackgroundColor]=\"'red'\">hello</p>\n<router-outlet></router-outlet>\n\n"
+module.exports = "<p [appBackgroundColor]=\"'red'\">hello</p>\n<app-menu></app-menu>\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -143,18 +161,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _logic_logic_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./logic/logic.module */ "./src/app/logic/logic.module.ts");
-/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shared/shared.module */ "./src/app/shared/shared.module.ts");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _shared_directives_background_color_directive__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/directives/background-color.directive */ "./src/app/shared/directives/background-color.directive.ts");
+/* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/shared.module */ "./src/app/shared/shared.module.ts");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _shared_directives_background_color_directive__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/directives/background-color.directive */ "./src/app/shared/directives/background-color.directive.ts");
+/* harmony import */ var _components_page_contact_page_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/page-contact/page.component */ "./src/app/components/page-contact/page.component.ts");
+/* harmony import */ var _components_page_home_page_home_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/page-home/page-home.component */ "./src/app/components/page-home/page-home.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -167,20 +187,21 @@ var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["NgModule"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"],
-                _shared_directives_background_color_directive__WEBPACK_IMPORTED_MODULE_7__["BackgroundColorDirective"]
+                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
+                _shared_directives_background_color_directive__WEBPACK_IMPORTED_MODULE_6__["BackgroundColorDirective"],
+                _components_page_contact_page_component__WEBPACK_IMPORTED_MODULE_7__["PageComponent"],
+                _components_page_home_page_home_component__WEBPACK_IMPORTED_MODULE_8__["PageHomeComponent"]
             ],
             imports: [
-                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_4__["BrowserModule"],
-                _shared_shared_module__WEBPACK_IMPORTED_MODULE_3__["SharedModule"],
-                _logic_logic_module__WEBPACK_IMPORTED_MODULE_2__["LogicModule"],
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["BrowserModule"],
+                _shared_shared_module__WEBPACK_IMPORTED_MODULE_2__["SharedModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_1__["AppRoutingModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"]
             ],
             providers: [],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;
@@ -190,10 +211,10 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/logic/components/page-home/page-home.component.css":
-/*!********************************************************************!*\
-  !*** ./src/app/logic/components/page-home/page-home.component.css ***!
-  \********************************************************************/
+/***/ "./src/app/components/page-contact/page.component.css":
+/*!************************************************************!*\
+  !*** ./src/app/components/page-contact/page.component.css ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -201,73 +222,10 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "./src/app/logic/components/page-home/page-home.component.html":
-/*!*********************************************************************!*\
-  !*** ./src/app/logic/components/page-home/page-home.component.html ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<p>\n  page-home works!\n</p>\n"
-
-/***/ }),
-
-/***/ "./src/app/logic/components/page-home/page-home.component.ts":
-/*!*******************************************************************!*\
-  !*** ./src/app/logic/components/page-home/page-home.component.ts ***!
-  \*******************************************************************/
-/*! exports provided: PageHomeComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageHomeComponent", function() { return PageHomeComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var PageHomeComponent = /** @class */ (function () {
-    function PageHomeComponent() {
-    }
-    PageHomeComponent.prototype.ngOnInit = function () {
-    };
-    PageHomeComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-page-home',
-            template: __webpack_require__(/*! ./page-home.component.html */ "./src/app/logic/components/page-home/page-home.component.html"),
-            styles: [__webpack_require__(/*! ./page-home.component.css */ "./src/app/logic/components/page-home/page-home.component.css")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], PageHomeComponent);
-    return PageHomeComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/logic/components/page/page.component.css":
-/*!**********************************************************!*\
-  !*** ./src/app/logic/components/page/page.component.css ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ""
-
-/***/ }),
-
-/***/ "./src/app/logic/components/page/page.component.html":
-/*!***********************************************************!*\
-  !*** ./src/app/logic/components/page/page.component.html ***!
-  \***********************************************************/
+/***/ "./src/app/components/page-contact/page.component.html":
+/*!*************************************************************!*\
+  !*** ./src/app/components/page-contact/page.component.html ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -275,10 +233,10 @@ module.exports = "<p>\n  page works!\n</p>\n"
 
 /***/ }),
 
-/***/ "./src/app/logic/components/page/page.component.ts":
-/*!*********************************************************!*\
-  !*** ./src/app/logic/components/page/page.component.ts ***!
-  \*********************************************************/
+/***/ "./src/app/components/page-contact/page.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/components/page-contact/page.component.ts ***!
+  \***********************************************************/
 /*! exports provided: PageComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -304,8 +262,8 @@ var PageComponent = /** @class */ (function () {
     PageComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-page',
-            template: __webpack_require__(/*! ./page.component.html */ "./src/app/logic/components/page/page.component.html"),
-            styles: [__webpack_require__(/*! ./page.component.css */ "./src/app/logic/components/page/page.component.css")]
+            template: __webpack_require__(/*! ./page.component.html */ "./src/app/components/page-contact/page.component.html"),
+            styles: [__webpack_require__(/*! ./page.component.css */ "./src/app/components/page-contact/page.component.css")]
         }),
         __metadata("design:paramtypes", [])
     ], PageComponent);
@@ -316,41 +274,63 @@ var PageComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/logic/logic.module.ts":
-/*!***************************************!*\
-  !*** ./src/app/logic/logic.module.ts ***!
-  \***************************************/
-/*! exports provided: LogicModule */
+/***/ "./src/app/components/page-home/page-home.component.css":
+/*!**************************************************************!*\
+  !*** ./src/app/components/page-home/page-home.component.css ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/components/page-home/page-home.component.html":
+/*!***************************************************************!*\
+  !*** ./src/app/components/page-home/page-home.component.html ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  page-home works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/page-home/page-home.component.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/components/page-home/page-home.component.ts ***!
+  \*************************************************************/
+/*! exports provided: PageHomeComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LogicModule", function() { return LogicModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageHomeComponent", function() { return PageHomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _components_page_home_page_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/page-home/page-home.component */ "./src/app/logic/components/page-home/page-home.component.ts");
-/* harmony import */ var _components_page_page_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/page/page.component */ "./src/app/logic/components/page/page.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
-
-
-
-var LogicModule = /** @class */ (function () {
-    function LogicModule() {
+var PageHomeComponent = /** @class */ (function () {
+    function PageHomeComponent() {
     }
-    LogicModule = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            declarations: [_components_page_home_page_home_component__WEBPACK_IMPORTED_MODULE_2__["PageHomeComponent"], _components_page_page_component__WEBPACK_IMPORTED_MODULE_3__["PageComponent"]],
-            imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]],
-            exports: [_components_page_home_page_home_component__WEBPACK_IMPORTED_MODULE_2__["PageHomeComponent"], _components_page_page_component__WEBPACK_IMPORTED_MODULE_3__["PageComponent"]]
-        })
-    ], LogicModule);
-    return LogicModule;
+    PageHomeComponent.prototype.ngOnInit = function () {
+    };
+    PageHomeComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-page-home',
+            template: __webpack_require__(/*! ./page-home.component.html */ "./src/app/components/page-home/page-home.component.html"),
+            styles: [__webpack_require__(/*! ./page-home.component.css */ "./src/app/components/page-home/page-home.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], PageHomeComponent);
+    return PageHomeComponent;
 }());
 
 
@@ -375,7 +355,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul>\n  <li><a [routerLink]=''>Strona główna</a> </li>\n  <li><a [routerLink]='contact'>Kontakt</a> </li>\n</ul>\n"
+module.exports = "<ul>\n  <li routerLink=\"/\">\n    Strona główna\n  </li>\n  <li routerLink=\"/contact\">\n    Kontakt\n  </li>\n  <li routerLink=\"/videos/video-list\">\n    Lista filmów\n  </li>\n  <li routerLink=\"/contact\">\n    Prolif filmu\n  </li>\n</ul>\n"
 
 /***/ }),
 
