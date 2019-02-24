@@ -1,5 +1,6 @@
 import { MoviesService } from './../../../movies.service';
 import { Component, OnInit } from '@angular/core';
+import { Movies } from '../../interfaces/movies';
 
 @Component({
   selector: 'app-page-video-list',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-video-list.component.css']
 })
 export class PageVideoListComponent implements OnInit {
+
+  public movies: Movies = null;
+
   constructor(private video: MoviesService) {}
 
   async getMovies() {
@@ -15,5 +19,8 @@ export class PageVideoListComponent implements OnInit {
     return response;
   }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.movies = await this.video.fetchMovies();
+  }
 }
+

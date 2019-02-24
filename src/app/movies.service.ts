@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Movies } from './logic/interfaces/movies';
 
 
 @Injectable({
@@ -9,8 +10,8 @@ import { environment } from 'src/environments/environment';
 export class MoviesService {
   constructor(private http: HttpClient) {}
 
-  async fetchMovies() {
-    const response = await this.http.get(environment.moviesUrl).toPromise();
-    return response;
+  fetchMovies() {
+   return <Promise<Movies>>this.http.get(environment.moviesUrl).toPromise();
+
   }
 }
