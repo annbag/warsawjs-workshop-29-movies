@@ -10,13 +10,15 @@ import { BackgroundColorDirective } from './shared/directives/background-color.d
 import { LogicRoutingModule } from './logic/logic-routing.module';
 import { PageComponent } from './components/page-contact/page.component';
 import { PageHomeComponent } from './components/page-home/page-home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BackgroundColorDirective,
     PageComponent,
-    PageHomeComponent
+    PageHomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

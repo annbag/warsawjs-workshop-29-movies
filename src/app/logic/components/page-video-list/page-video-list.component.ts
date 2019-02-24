@@ -1,3 +1,4 @@
+import { MoviesService } from './../../../movies.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-video-list.component.css']
 })
 export class PageVideoListComponent implements OnInit {
+  constructor(private video: MoviesService) {}
 
-  constructor() { }
+   getMovies() {
+   const response =  this.video.fetchMovies();
+   console.log(response);
+   return response;
+ }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
