@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PageVideoListComponent
   },
   {
-    path: 'video-profile',
+    path: ':id',
     component: PageVideoProfileComponent
   }
 ];
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LogicRoutingModule { }
+export class LogicRoutingModule {}
