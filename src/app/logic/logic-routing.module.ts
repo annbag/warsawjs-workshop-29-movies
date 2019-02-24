@@ -5,7 +5,7 @@ import { PageVideoListComponent } from './components/page-video-list/page-video-
 
 const routes: Routes = [
   {
-    path: 'video-list',
+    path: '',
     component: PageVideoListComponent
   },
   {
