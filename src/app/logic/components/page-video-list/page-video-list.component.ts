@@ -9,11 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class PageVideoListComponent implements OnInit {
   constructor(private video: MoviesService) {}
 
-   getMovies() {
-   const response =  this.video.fetchMovies();
-   console.log(response);
-   return response;
- }
+  async getMovies() {
+    const response = await gitthis.video.fetchMovies();
+    console.log(response);
+    return response;
+  }
 
   ngOnInit() {}
 }

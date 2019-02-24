@@ -1,3 +1,4 @@
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { LogicModule } from './logic/logic.module';
@@ -10,7 +11,6 @@ import { BackgroundColorDirective } from './shared/directives/background-color.d
 import { LogicRoutingModule } from './logic/logic-routing.module';
 import { PageComponent } from './components/page-contact/page.component';
 import { PageHomeComponent } from './components/page-home/page-home.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
