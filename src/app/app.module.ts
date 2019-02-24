@@ -7,16 +7,20 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BackgroundColorDirective } from './shared/directives/background-color.directive';
+import { LogicRoutingModule } from './logic/logic-routing.module';
+import { PageComponent } from './components/page-contact/page.component';
+import { PageHomeComponent } from './components/page-home/page-home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BackgroundColorDirective
+    BackgroundColorDirective,
+    PageComponent,
+    PageHomeComponent
   ],
   imports: [
     BrowserModule,
     SharedModule,
-    LogicModule,
     AppRoutingModule,
     RouterModule
   ],
